@@ -12,7 +12,7 @@ export default function HomeScreen() {
   const greet = (name: string) => {
     return `Bonjour ${name}!`;
   };
-  const classmates = ["Maychelle", "Jackie", "Jaydee"];
+  const classmates = ["Maychelle", "Jackie", "Jaydee", "Adam", "Selene"];
 
   console.log(classmates.map(name => greet(name)));
   return (
