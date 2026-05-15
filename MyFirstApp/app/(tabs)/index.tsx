@@ -5,7 +5,6 @@ import MEEE from '../../assets/images/MEEE.jpg';
 export default function App() {
   return (
     <View style={s.screen}>
-      {/* 2. Use the imported variable name directly in the source prop */}
       <Image source={MEEE} style={s.photo} /> 
       
       <Text style={s.name}>June Rose Paragat</Text>
