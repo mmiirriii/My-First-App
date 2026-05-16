@@ -1,60 +1,75 @@
-import { Image } from 'expo-image';
+import { Image } from 'expo-image'; // Keeping your fast expo-image import
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import MEEE from '../../assets/images/MEEE.jpg';
 
 export default function App() {
+  // State variables
   const [name, setName] = useState('');
-  return (
-    <View style={s.screen}>
-      <Image source={MEEE}
-      style={s.photo}
-    /> 
+  const [count, setCount] = useState(0);
 
-    <TextInput 
-        placeholder="Type your name"
-        placeholderTextColor="#aaa"
-        onChangeText={setName}
-        value={name}
-        style={{
-          height: 40,
-          margin: 12,
-          borderWidth: 1,
-          padding: 10,
-          width: 200,
-        }}
+  // Message based on counter
+  const message =
+    count > 0
+      ? `${name}, you tapped ${count} times!`
+      : "Tap the + button to start";
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      {/* Profile Image */}
+      <Image source={MEEE} style={styles.image} />
+
+      {/* Input */}
+      <TextInput 
+        placeholder="Enter your name" 
+        onChangeText={setName} 
+        value={name} 
+        style={styles.input} 
       />
 
-    <Text style={s.name}>
-      Hello, {name}!
-    </Text>    
-
-    <Text style={s.bio}>
-      3rd Year MMA Student at Mapúa Malayan Colleges Mindanao
+      {/* Greeting */}
+      <Text style={styles.text}>
+        {name === '' ? 'Please enter your name' : `Hello, ${name}!`}
       </Text>
-    </View>
+
+      {/* Counter Message */}
+      <Text style={styles.text}>{message}</Text>
+
+      {/* Buttons */}
+      <View style={styles.buttonContainer}>
+        <Button title="+" onPress={() => setCount(count + 1)} />
+        <Button title="-" onPress={() => setCount(count - 1)} />
+        <Button title="Reset" onPress={() => setCount(0)} />
+      </View>
+    </ScrollView>
   );
 }
-// I change the stylesheet to make the profile screen look better. 05/16/2026
-const s = StyleSheet.create({
-  screen: { 
-    flex: 1, 
-    alignItems: 'center', 
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff' 
+    padding: 20,
   },
-  photo: { 
-    width: 120, 
-    height: 120, 
-    borderRadius: 60 
+  image: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 20,
   },
-  name: { 
-    fontSize: 22, 
-    fontWeight: 'bold', 
-    marginTop: 12 
+  input: {
+    borderWidth: 1,
+    width: '80%',
+    padding: 10,
+    marginBottom: 10,
   },
-  bio: { 
-    fontSize: 14, 
-    color: '#888'
+  text: { 
+    fontSize: 16, 
+    marginVertical: 5 
   },
+  buttonContainer: { 
+    marginTop: 10, 
+    width: '60%' 
+  }
 });
